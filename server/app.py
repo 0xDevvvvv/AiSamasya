@@ -32,11 +32,7 @@ def pdftotext(pdf_filename, txt_filename):
         for page_num in range(len(reader.pages)):
             page = reader.pages[page_num]
             text += page.extract_text()
-        # print(text)
         return text
-        # Write the extracted text to a .txt file
-        # with open(txt_filename, 'w', encoding='utf-8') as txt_file:
-        #     txt_file.write(text)
 
 @app.route('/') 
 def main(): 
