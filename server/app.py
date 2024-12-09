@@ -1,5 +1,6 @@
 from fileinput import filename 
 from flask import *
+import os
 import PyPDF2
 import google.generativeai as genai
 from pptx import Presentation
@@ -90,7 +91,7 @@ def success():
 # Save the presentation
         prs.save(pptname)
 
-        return render_template("Acknowledgement.html", name=f.filename) 
-
+        os.remove(f.filename)
+        return render_template("Acknowledgement.html", name=pptname) 
 if __name__ == '__main__': 
     app.run()
