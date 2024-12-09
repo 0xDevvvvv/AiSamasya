@@ -65,7 +65,7 @@ def success():
     if request.method == 'POST': 
         f = request.files['file'] 
         f.save(f.filename) 
-
+        pptname = f.filename + ".pptx"
         text = ""
         text += pdftotext(f.filename, 'output.txt')
         # Prompting
@@ -88,7 +88,7 @@ def success():
             add_slide(prs, slide_content["title"], slide_content["contents"], slide_content["bg_color"], slide_content["title_color"], slide_content["content_color"])
 
 # Save the presentation
-        prs.save('Module2.pptx')
+        prs.save(pptname)
 
         return render_template("Acknowledgement.html", name=f.filename) 
 
