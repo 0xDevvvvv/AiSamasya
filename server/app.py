@@ -1,32 +1,18 @@
-from flask import Flask, request, jsonify,send_file
-import requests
-from flask_cors import CORS
-app = Flask(__name__)
+from distutils.log import debug 
+from fileinput import filename 
+from flask import *
+app = Flask(__name__) 
 
-CORS(app)
+@app.route('/') 
+def main(): 
+	return render_template("index.html") 
 
+@app.route('/success', methods = ['POST']) 
+def success(): 
+	if request.method == 'POST': 
+		f = request.files['file'] 
+		f.save(f.filename) 
+		return render_template("Acknowledgement.html", name = f.filename) 
 
-class UserData:
-    def __init__(self, username, name):
-        self.username = username
-        self.name = name
-   
-    
-    def to_dict(self):
-        return {
-            'username': self.username,
-            'name': self.name
-        }
-
-
-@app.route('/', methods=['POST'])
-def api_login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
-    payload = {
-        'LoginForm[username]': username,
-        'LoginForm[password]': password
-    }
-   
-    
+if __name__ == '__main__': 
+	app.run(debug=True)
