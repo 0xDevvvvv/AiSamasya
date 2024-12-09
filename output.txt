@@ -1,0 +1,32 @@
+Waterfall Model Overview
+Introduction
+The Waterfall Model is a fundamental software development methodology that outlines a linear and
+sequential approach. Each stage must be completed before moving to the next.
+Stages of the Waterfall Model
+1. **Requirements analysis and definition**: 
+- Establishing the system's services, constraints, and goals in consultation with system users.
+- Defining them in detail to serve as a system specification.
+2. **System and software design**: 
+- Allocating the requirements to either hardware or software systems.
+- Establishing an overall system architecture.
+- Identifying and describing the fundamental software system abstractions and their relationships.
+3. **Implementation and unit testing**: 
+- Realizing the software design as a set of programs or program units.
+- Verifying that each unit meets its specification.
+4. **Integration and system testing**: 
+- Integrating and testing individual program units or programs as a complete system.
+- Ensuring that the software requirements have been met.
+- Delivering the system to the customer.
+5. **Operation and maintenance**: 
+Page 1Waterfall Model Overview
+- Installing the system and putting it into practical use.
+- Correcting errors not discovered in earlier stages.
+- Improving the implementation of system units.
+- Enhancing the system's services as new requirements are discovered.
+Additional Notes
+The Waterfall Model is particularly appropriate for:
+- Embedded systems where the software has to interface with hardware systems.
+- Critical systems requiring extensive safety and security analysis.
+- Large software systems that are part of broader engineering systems developed by several partner
+companies.
+Page 2
