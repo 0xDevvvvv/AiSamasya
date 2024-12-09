@@ -14,6 +14,15 @@ prs = Presentation()
 genai.configure(api_key="AIzaSyAusjXdqax_JcIQMd5QBs_bLJGcc47KOAo")
 model = genai.GenerativeModel("gemini-1.5-flash")
 
+# Define the folder to save PowerPoint presentations
+out_folder = 'output_ppts'
+
+# Ensure the output folder exists
+if not os.path.exists(out_folder):
+    os.makedirs(out_folder)
+
+app.config['out_folder'] = out_folder
+
 
 def pdftotext(pdf_filename, txt_filename):
     with open(pdf_filename, 'rb') as pdf_file:
@@ -61,12 +70,25 @@ def convertrgb(color_list):
     b=int(color_list[2])
     return RGBColor(r,g,b)
 
+@app.route('/output_ppts/<filename>')
+def download(filename):
+    return send_from_directory(app.config['out_folder'], filename, as_attachment=True)
+
+
+# Save the generated presentation
+def save_presentation(file_name):
+    custom_filename = file_name.split('.')[0] + ".pptx"
+    custom_file_path = os.path.join(out_folder, custom_filename)
+    prs.save(custom_file_path)  # Save the presentation to the output folder
+    return custom_filename
+
+
 @app.route('/success', methods=['POST'])
 def success(): 
     if request.method == 'POST': 
         f = request.files['file'] 
         f.save(f.filename) 
-        pptname = f.filename + ".pptx"
+        pptname = f.filename.split('.')[0] + ".pptx"
         text = ""
         text += pdftotext(f.filename, 'output.txt')
         # Prompting
@@ -89,7 +111,7 @@ def success():
             add_slide(prs, slide_content["title"], slide_content["contents"], slide_content["bg_color"], slide_content["title_color"], slide_content["content_color"])
 
 # Save the presentation
-        prs.save(pptname)
+        save_presentation(pptname)
 
         os.remove(f.filename)
         return render_template("Acknowledgement.html", name=pptname) 

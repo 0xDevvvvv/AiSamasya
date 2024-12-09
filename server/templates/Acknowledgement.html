@@ -1,9 +1,13 @@
-<html> 
-<head> 
-	<title>success</title> 
-</head> 
-<body> 
-	<p>File uploaded successfully</p> 
-	<p>File Name: {{name}}</p> 
-</body> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Your PowerPoint</title>
+</head>
+<body>
+    <h1>Your PowerPoint Presentation is Ready!</h1>
+    <p>Click the link below to download your presentation:</p>
+    <a href="{{ url_for('download', filename=name) }}" download>Download Your PowerPoint</a>
+</body>
 </html>
