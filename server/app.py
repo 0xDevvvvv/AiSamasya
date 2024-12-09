@@ -69,7 +69,7 @@ def success():
 
         text = ""
         text += pdftotext(f.filename, 'output.txt')
-        # print(text)
+        # Prompting
         prompt = text + """Summarise but make sure to include all the important content so that its easier 
         for an adhd person to understand, to the following JSON schema , give light vibrant colors such that
          the text is visible even with it
@@ -78,12 +78,12 @@ def success():
         slide_content = {'title': str, 'contents': list[str],'bg_color':rgb(),'title_color':rgb(),'content_color':rgb()}
         Return: list[slide_content]"""
         response = model.generate_content(prompt)
-        #print(response.text)
+
+        # Convert to JSON
         temp = response.text
         clean_temp = temp[temp.find("["):temp.rfind("]") + 1].strip()
-        print (clean_temp)
         slides_content =json.loads(clean_temp)
-        # print(slides_content)
+
         # Add slides to the presentation
         for slide_content in slides_content:
             add_slide(prs, slide_content["title"], slide_content["contents"], slide_content["bg_color"], slide_content["title_color"], slide_content["content_color"])
